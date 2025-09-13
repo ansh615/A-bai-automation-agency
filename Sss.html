@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A & B AI Automation Agency</title>
+    
+    <!-- Favicon Link -->
+    <link rel="icon" href="input_file_0.png" type="image/png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* =================================================================
+           1. GLOBAL STYLES & VARIABLES
+        ================================================================= */
+        :root {
+            --primary-color: #3498db;
+            --primary-hover-color: #2980b9;
+            --secondary-color: #2c3e50;
+            --accent-color: #27ae60;
+            --accent-hover-color: #229954;
+            --text-color: #333;
+            --light-grey-bg: #f4f7f6;
+            --white-color: #fff;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-grey-bg);
+            color: var(--text-color);
+        }
+        
+        h2 {
+            font-size: 2.8rem;
+            margin-bottom: 3rem;
+            color: var(--secondary-color);
+            font-weight: 700;
+        }
+
+        /* =================================================================
+           2. HEADER & NAVIGATION
+        ================================================================= */
+        header {
+            background-color: var(--white-color);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo img {
+            height: 50px; /* Controls the height of your logo image */
+            width: auto;
+            display: block;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul li {
+            margin-left: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #34495e;
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 5px;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        nav a .cart-icon {
+            width: 20px;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease-in-out;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* =================================================================
+           3. HOME PAGE STYLES
+        ================================================================= */
+
+        /* --- 3.1 Hero Section --- */
+        .hero {
+            background: linear-gradient(to right, rgba(44, 62, 80, 0.8), rgba(52, 152, 219, 0.8)), url('https://via.placeholder.com/1500x600') no-repeat center center/cover;
+            color: var(--white-color);
+            padding: 8rem 2rem;
+            text-align: center;
+        }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 1rem; font-weight: 700; }
+        .hero p { font-size: 1.3rem; margin-bottom: 2.5rem; font-weight: 300; }
+
+        .cta-button {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .cta-button:hover {
+            background-color: var(--primary-hover-color);
+            transform: translateY(-5px);
+        }
+        
+        /* --- 3.2 Generic Section & Card Styles --- */
+        section { padding: 5rem 2rem; text-align: center; overflow: hidden; }
+
+        .services-container, .products-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .service-card, .product-card {
+            background-color: var(--white-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .service-card:hover, .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        /* --- 3.3 Services Section --- */
+        .service-card { padding: 2.5rem; width: 320px; }
+        .service-icon { width: 60px; height: 60px; margin-bottom: 1rem; color: var(--primary-color); }
+        .service-card h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--primary-color); }
+        
+        /* --- 3.4 Products Section --- */
+        .product-card { width: 300px; text-align: left; overflow: hidden; }
+        .product-card img { width: 100%; height: 200px; object-fit: cover; }
+        .product-info { padding: 1.5rem; }
+        .product-info h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+        .product-price { color: var(--accent-color); font-size: 1.2rem; font-weight: bold; margin-bottom: 1rem; }
+        
+        .add-to-cart-btn {
+            background-color: var(--accent-color);
+            color: var(--white-color);
+            padding: 0.6rem 1rem;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .add-to-cart-btn:hover { background-color: var(--accent-hover-color); transform: scale(1.05); }
+
+        /* --- 3.5 About & Contact Sections --- */
+        .about-content { max-width: 800px; margin: 0 auto; line-height: 1.8; font-size: 1.1rem; }
+        .contact-form { max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem; }
+        .contact-form input, .contact-form textarea { width: 100%; padding: 0.8rem; border: 1px solid #ccc; border-radius: 5px; font-family: 'Poppins', sans-serif; }
+        .contact-form button { background-color: var(--primary-color); color: var(--white-color); padding: 0.8rem; border: none; border-radius: 5px; font-size: 1rem; cursor: pointer; transition: background-color 0.3s, transform 0.3s; }
+        .contact-form button:hover { background-color: var(--primary-hover-color); transform: translateY(-3px); }
+        
+        /* =================================================================
+           4. CART PAGE STYLES
+        ================================================================= */
+        #cart-content {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .cart-container { display: flex; gap: 2rem; flex-wrap: wrap; }
+        .cart-items { flex: 2; background: var(--white-color); padding: 2rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        
+        .cart-item { display: flex; align-items: center; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid #eee; }
+        .cart-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .cart-item img { width: 100px; height: 70px; object-fit: cover; border-radius: 5px; margin-right: 1.5rem; }
+
+        .item-details { flex-grow: 1; }
+        .item-details h3 { margin: 0 0 0.5rem 0; font-size: 1.2rem; }
+        .item-details p { margin: 0; color: #777; }
+        .item-quantity input { width: 50px; padding: 0.5rem; text-align: center; border: 1px solid #ccc; border-radius: 5px; margin: 0 1rem; }
+        .item-price { font-weight: bold; font-size: 1.1rem; width: 100px; text-align: right; }
+        .item-remove { color: #e74c3c; text-decoration: none; margin-left: 2rem; font-size: 0.9rem; }
+        .item-remove:hover { text-decoration: underline; }
+        
+        .cart-summary { flex: 1; background: var(--white-color); padding: 2rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); height: fit-content; }
+        .cart-summary h3 { font-size: 1.5rem; margin-top: 0; border-bottom: 1px solid #eee; padding-bottom: 1rem; }
+        .summary-row { display: flex; justify-content: space-between; margin-bottom: 1rem; }
+        .summary-total { font-weight: bold; font-size: 1.2rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #eee; }
+        
+        .checkout-btn { display: block; width: 100%; padding: 1rem; background: var(--accent-color); color: var(--white-color); text-align: center; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 1.1rem; border: none; cursor: pointer; transition: background-color 0.3s, transform 0.3s; }
+        .checkout-btn:hover { background-color: var(--accent-hover-color); transform: translateY(-3px); }
+        
+        /* =================================================================
+           5. FOOTER
+        ================================================================= */
+        footer { background-color: var(--secondary-color); color: var(--white-color); text-align: center; padding: 2.5rem 2rem; }
+        .footer-links { margin-bottom: 1.5rem; }
+        .footer-links a { color: var(--white-color); text-decoration: none; margin: 0 1rem; font-size: 1.2rem; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--primary-color); }
+
+        /* =================================================================
+           6. ANIMATION UTILITIES
+        ================================================================= */
+        .animate-on-scroll { opacity: 0; transform: translateY(50px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
+
+    </style>
+</head>
+<body>
+
+    <!-- =================================================================
+       HEADER - This is visible on all pages.
+    ================================================================= -->
+    <header>
+        <a href="#" class="logo" data-target="home">
+            <img src="input_file_0.png" alt="A & B AI Automation Agency Logo">
+        </a>
+        <nav>
+            <ul>
+                <li><a data-target="home">Home</a></li>
+                <li><a data-target="services">Services</a></li>
+                <li><a data-target="products">Products</a></li>
+                <li><a data-target="about">About Us</a></li>
+                <li><a data-target="contact">Contact</a></li>
+                <li>
+                    <a data-target="cart">
+                        <svg class="cart-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c.51 0 .962-.343 1.087-.835l1.838-5.513a1.875 1.875 0 00-1.097-2.274l-4.13-1.652a1.125 1.125 0 00-1.317.923l-1.35 6.753M15 14.25a3 3 0 00-3 3h.01M4.5 18a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm12 0a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" /></svg>
+                        My Cart
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- =================================================================
+       MAIN CONTENT WRAPPER - Contains all switchable page content.
+    ================================================================= -->
+    <main>
+
+        <!-- =========== HOME PAGE CONTENT (Visible by default) =========== -->
+        <div id="home-content">
+            <section id="home" class="hero">
+                <h1 class="animate-on-scroll">Welcome to A & B AI Automation Agency</h1>
+                <p class="animate-on-scroll" style="transition-delay: 100ms;">Your one-stop solution for AI-powered automation and e-commerce products.</p>
+                <a href="#services" class="cta-button animate-on-scroll" style="transition-delay: 200ms;">Explore Our Services</a>
+            </section>
+            
+            <section id="services">
+                <h2 class="animate-on-scroll">Our Services</h2>
+                <div class="services-container">
+                    <div class="service-card animate-on-scroll">
+                         <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <h3>AI-Powered Chatbots</h3>
+                        <p>Engage your customers 24/7 with intelligent and responsive chatbots tailored to your business needs.</p>
+                    </div>
+                    <div class="service-card animate-on-scroll" style="transition-delay: 100ms;">
+                        <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
+                        <h3>Process Automation</h3>
+                        <p>Streamline your workflows and increase efficiency by automating repetitive tasks with our custom AI solutions.</p>
+                    </div>
+                    <div class="service-card animate-on-scroll" style="transition-delay: 200ms;">
+                        <svg class="service-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-1.65 5.25h16.5" /></svg>
+                        <h3>Data Analysis</h3>
+                        <p>Unlock valuable insights from your data with our advanced AI-driven analytics services.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="products" style="background-color: #ecf0f1;">
+                <h2 class="animate-on-scroll">Our Products</h2>
+                <div class="products-container">
+                    <div class="product-card animate-on-scroll"><img src="https://via.placeholder.com/300x200" alt="Product 1"><div class="product-info"><h3>AI Automation</h3><p class="product-price">NRP 1000</p><a href="#" class="add-to-cart-btn">Add to Cart</a></div></div>
+                    <div class="product-card animate-on-scroll" style="transition-delay: 100ms;"><img src="https://via.placeholder.com/300x200" alt="Product 2"><div class="product-info"><h3>Maintenance per Month</h3><p class="product-price">NRP 50</p><a href="#" class="add-to-cart-btn">Add to Cart</a></div></div>
+                    <div class="product-card animate-on-scroll" style="transition-delay: 200ms;"><img src="https://via.placeholder.com/300x200" alt="Product 3"><div class="product-info"><h3>Maintenance per Year</h3><p class="product-price">NRP 200</p><a href="#" class="add-to-cart-btn">Add to Cart</a></div></div>
+                    <div class="product-card animate-on-scroll" style="transition-delay: 300ms;"><img src="https://via.placeholder.com/300x200" alt="Product 4"><div class="product-info"><h3>Maintenance for Lifetime</h3><p class="product-price">NRP 1000</p><a href="#" class="add-to-cart-btn">Add to Cart</a></div></div>
+                </div>
+            </section>
+            
+            <section id="about">
+                <h2 class="animate-on-scroll">About Us</h2>
+                <div class="about-content animate-on-scroll"><p>A & B AI Automation Agency is a team of passionate AI experts and developers dedicated to helping businesses leverage the power of artificial intelligence. We believe in creating innovative solutions that drive growth and efficiency. Our mission is to provide top-notch AI automation services and products that are accessible and affordable for businesses of all sizes.</p></div>
+            </section>
+            
+            <section id="contact" style="background-color: #ecf0f1;">
+                <h2 class="animate-on-scroll">Contact Us</h2>
+                <form class="contact-form animate-on-scroll"><input type="text" placeholder="Your Name" required><input type="email" placeholder="Your Email" required><textarea rows="5" placeholder="Your Message" required></textarea><button type="submit">Send Message</button></form>
+            </section>
+        </div>
+
+        <!-- =========== CART PAGE CONTENT (Hidden by default) =========== -->
+        <div id="cart-content" style="display: none;">
+            <h2>Your Shopping Cart</h2>
+            <div class="cart-container">
+                <div class="cart-items">
+                    <div class="cart-item">
+                        <img src="https://via.placeholder.com/300x200" alt="Product 1"><div class="item-details"><h3>AI Automation</h3><p>One-time setup fee</p></div><div class="item-quantity"><input type="number" value="1" min="1"></div><div class="item-price">NRP 1000</div><a href="#" class="item-remove">Remove</a>
+                    </div>
+                    <div class="cart-item">
+                        <img src="https://via.placeholder.com/300x200" alt="Product 2"><div class="item-details"><h3>Maintenance per Year</h3><p>Billed annually</p></div><div class="item-quantity"><input type="number" value="1" min="1"></div><div class="item-price">NRP 200</div><a href="#" class="item-remove">Remove</a>
+                    </div>
+                </div>
+                <aside class="cart-summary">
+                    <h3>Order Summary</h3>
+                    <div class="summary-row"><span>Subtotal</span><span>NRP 1200</span></div>
+                    <div class="summary-row"><span>Tax (13%)</span><span>NRP 156</span></div>
+                    <div class="summary-row summary-total"><span>Total</span><span>NRP 1356</span></div>
+                    <button class="checkout-btn">Proceed to Checkout</button>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- =================================================================
+       FOOTER - This is visible on all pages.
+    ================================================================= -->
+    <footer>
+        <div class="footer-links">
+            <a href="tel:+9827544215">Call Us</a>
+            <a href="mailto:yansh8313@gmail.com">Email Us</a>
+        </div>
+        <p>&copy; 2025 A & B AI Automation Agency. All Rights Reserved.</p>
+    </footer>
+
+    <!-- =================================================================
+       JAVASCRIPT LOGIC - Handles page switching and animations.
+    ================================================================= -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            // --- 1. PAGE NAVIGATION LOGIC ---
+            const homeContent = document.getElementById('home-content');
+            const cartContent = document.getElementById('cart-content');
+            const navLinks = document.querySelectorAll('nav a[data-target], .logo[data-target]');
+            const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+
+            function showPage(targetId) {
+                window.scrollTo(0, 0); 
+                
+                if (targetId === 'cart') {
+                    homeContent.style.display = 'none';
+                    cartContent.style.display = 'block';
+                } else {
+                    homeContent.style.display = 'block';
+                    cartContent.style.display = 'none';
+                    
+                    const section = document.getElementById(targetId);
+                    if (section) {
+                        section.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showPage(link.getAttribute('data-target'));
+                });
+            });
+            
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showPage('cart');
+                });
+            });
+
+            // --- 2. ON-SCROLL ANIMATION LOGIC ---
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
+            elementsToAnimate.forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+
+</body>
+  </html>
